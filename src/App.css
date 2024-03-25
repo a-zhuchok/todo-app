@@ -79,3 +79,6 @@ button:hover{
   display: flex;
   align-items:center;
   }
+.todo_text {
+  cursor: pointer;
+}
