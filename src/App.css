@@ -1,8 +1,8 @@
 * {
   box-sizing: border-box;
-  font-size: 30px;
   font-weight: 400;
-  }
+  margin: 0px;
+}
 ul {
   list-style: none;
   min-width: 70%;
@@ -10,26 +10,35 @@ ul {
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 0;
-  }
+}
 .container {
   min-height: 100vh;
   text-align: center;
   background-color: #8a44c4;
-  }
+}
 .logo {
-  display: flex;
-  align-items: center;
-  margin-left: 10%;
+  padding-top: 20px;
+  margin-bottom: 30px;
   font-style: italic;
-  }
+  font-size: 40px;
+  color: #FFFFFF;
+}
 .todoList {
   background-color: #4b095f;
   display: flex;
-  max-width: 60%;
+  max-width: 70%;
   margin: auto;
   flex-direction: column;
-  }
-.todo{
+  font-size: 30px;
+}
+.signForm, .loginForm {
+  background-color: #4b095f;
+  display: flex;
+  max-width: 70%;
+  margin: auto;
+  flex-direction: column;
+}
+.todo {
   background-color: #8b3dca;
   display: flex;
   justify-content: space-between;
@@ -37,32 +46,38 @@ ul {
   color: #FFFFFF;
   min-width: 80%;
   padding-left: 5px;
-  }
+}
 .addTodo_title {
   font-size: 50px;
   color: #FFFFFF;
-  }
+  margin-top: 30px;
+}
 .addTodo_input {
   width: 60%;
   font-family: inherit;
-  }
+  font-size: 30px;
+  margin-top: 30px;
+}
 .todo_button {
   border: 0px;
   cursor: pointer;
   margin-right: 10px;
-  }
+  font-size: 30px;
+}
 .editTodo {
   margin-bottom: 20px;
   display: flex;
   flex-direction: row;
-  }
+  font-size: 30px;
+}
 input {
   width: 100%;
   color: #FFFFFF;
   background-color: #4b095f;
   border: 1px solid #be6fff;
   padding-left: 5px;
-  }
+  font-size: 30px;
+}
 button {
   background-color: #be6fff;
   border: 0px;
@@ -70,15 +85,38 @@ button {
   font-family: inherit;
   border: 1px solid #be6fff;
   color: #ffffff;
-  }
-button:hover{
-  background: rgba(0,0,0,0);
-	color: #ffffff;
-  }
+  font-size: 30px;
+}
+button:hover {
+  background: rgba(0, 0, 0, 0);
+  color: #ffffff;
+}
 .todo_buttons {
   display: flex;
-  align-items:center;
-  }
+  align-items: center;
+}
 .todo_text {
   cursor: pointer;
+}
+.todoForm {
+  background-color: #4b095f;
+  display: flex;
+  max-width: 70%;
+  margin: auto;
+  flex-direction: column;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  align-items: center;
+}
+.pageLink {
+  color: #ffffff;
+  font-size: 20px;
+}
+a {
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 25px;
+}
+label {
+  color: #FFFFFF;
 }
