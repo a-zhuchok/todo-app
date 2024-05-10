@@ -1,9 +1,16 @@
 import React from 'react';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, message } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 
-const SignUp = () => {
-  const navigate = useNavigate()
+const Login = () => {
+  const navigate = useNavigate();
+  const [messageApi, contextHolder] = message.useMessage()
+  const error = () => {
+    messageApi.open({
+      type: 'error',
+      content: 'User does not exist!',
+    });
+  };
   const onFinish = async (values) => {
     try {
       const response = await fetch('https://todo-redev.herokuapp.com/api/auth/login', {
@@ -19,7 +26,7 @@ const SignUp = () => {
         const userToken = userData.token
         localStorage.setItem('user', userToken)
         navigate('/TodoList')}
-      else {alert ('Such user does not exist')}
+      else {error()}
     } catch (error) {
       console.log("error: ", error)
     }
@@ -66,12 +73,11 @@ const SignUp = () => {
         >
           <Input.Password />
         </Form.Item>
-
-           <Button type="primary" htmlType="submit" style={{ height: '50px', backgroundColor: '#be6fff', fontSize: '20px' }} >Login In</Button>
-         
+        {contextHolder}
+        <Button type="primary" htmlType="submit" style={{ height: '50px', backgroundColor: '#be6fff', fontSize: '20px' }} >Login In</Button>
       </Form>
       <div class="pageLink">Don't have an account?<Link to="/*">Sign Up!</Link></div>
     </div>
   );
 }
-export default SignUp;
+export default Login;

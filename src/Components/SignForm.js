@@ -1,10 +1,23 @@
 import React, { useState } from 'react';
-import { Button, Form, Input, Radio } from 'antd';
+import { Button, Form, Input, Radio,  message } from 'antd';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
   const navigate = useNavigate()
+  const [messageApi, contextHolder] = message.useMessage()
+  const success = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'User is registered!',
+    })
+  }
+  const error = () => {
+    messageApi.open({
+      type: 'error',
+      content: 'This user already exists!',
+    })
+  }
   const onFinish = async (values) => {
     try {
       const response = await fetch('https://todo-redev.herokuapp.com/api/users/register', {
@@ -15,9 +28,9 @@ const SignUp = () => {
         body: JSON.stringify(values)
       })
       const userData = await response.json()
-      if (response.ok !== true) { alert(userData.message) }
-      else { navigate('/LoginForm')}
-      alert("User is registered")
+      if (response.ok !== true) {error()}
+      navigate('/LoginForm')
+      success()
     } catch (error) {
       console.log("error: ", error.message)
     }
@@ -65,7 +78,7 @@ const SignUp = () => {
             },
             {
               type: "email",
-              message: "This email does not exist!"
+              message: "Incorrect email!"
             },
           ]}
         >
@@ -82,7 +95,7 @@ const SignUp = () => {
             },
             {
               pattern: /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g,
-              message: 'Please input the correct password!',
+              message: 'Incorrect password! Password must be at least 8 characters long and include capital letters and symbols.',
             },
           ]}
         >
@@ -121,9 +134,8 @@ const SignUp = () => {
         >
           <Input style={{ fontSize: '20px' }} />
         </Form.Item>
-
+        {contextHolder}
         <Button type="primary" htmlType="submit" style={{ height: '50px', backgroundColor: '#be6fff', fontSize: '20px' }} >Sign Up</Button>
-
       </Form>
       <div class="pageLink">Already have an account?<Link to="/LoginForm">Login!</Link></div>
     </div>

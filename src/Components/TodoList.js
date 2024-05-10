@@ -76,7 +76,7 @@ const TodoList = () => {
         }
         setTodos(todos.map(todo => {
              if (todo.id === completedTodo.id) {
-                return { ...todo, isСompleted: !todo.isСompleted }
+                return { ...todo, isCompleted: !todo.isCompleted }
             } else {
                 return todo
             }
