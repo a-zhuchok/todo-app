@@ -1,22 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { saveEditTodo } from '../redux/actions/todosAction';
 
-const EditTodo = ({ todo, updateTodo }) => {
-    const [text, setText] = useState(todo.title)
-    const handleChange = (event) => {
-        setText(event.target.value)
-    }
-    const editTodo = () => {
-        todo.title = text
-        if (text !== '') {
-            updateTodo(todo)
-        }
-    }
-
-    return (
-        <div class="editTodo">
-            <input type='text' value={text} onChange={handleChange}></input>
-            <button onClick={editTodo}>Update</button>
+const EditTodo = ({todo}) => {
+  const dispatch = useDispatch();
+  const { todos } = useSelector(state => state.todos)
+  const save = e => {
+    e.preventDefault()
+    dispatch(saveEditTodo(todo))   
+  }
+  return (
+    <div class="editTodo">
+      <input type='text' value={todo.description} ></input>
+      <button onClick={e => save(e)}>Update</button>
         </div>
-    )
-}
+  );
+};
+
 export default EditTodo;
