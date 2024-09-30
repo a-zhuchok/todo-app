@@ -6,20 +6,19 @@ import { addNewTodo } from '../redux/actions/todosAction';
 
 const AddTodo = () => {
   const dispatch = useDispatch();
-  const { todoText } = useSelector(state => state.todoText); 
-  const handleSubmit = e => {
-    e.preventDefault()
-    dispatch(addNewTodo({ id: uuidv4(), text: todoText, isСompleted: false, isEdit: true, })) 
-    dispatch(addTodoText('')) 
+  const { todoText } = useSelector(state => state.todoText);
+  const addTodo = e => {
+    dispatch(addNewTodo({ id: uuidv4(), text: todoText, isСompleted: false, isEdit: true, }))
+    dispatch(addTodoText(''))
   }
-
+  
   return (
     <div class='addTodo'>
-    <p class='addTodo_title'>Get things done!</p>
-    <div>
-      <input class='addTodo_input' value={todoText} onChange={e => dispatch(addTodoText(e.target.value))} />
-      <button onClick={e => handleSubmit(e)}>Создать</button>
-    </div>
+      <p class='addTodo_title'>Get things done!</p>
+      <div>
+        <input class='addTodo_input' value={todoText} onChange={e => dispatch(addTodoText(e.target.value))} />
+        <button onClick={e => addTodo(e)}>Создать</button>
+      </div>
     </div>
   );
 };

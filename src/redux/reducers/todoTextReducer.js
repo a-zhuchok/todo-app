@@ -4,7 +4,7 @@ const initialState = {
   
   const todoTextReducer = (state = initialState, action) => {
     switch (action.type) {
-      case 'ADD_TODO':
+      case 'ADD_TODO_TEXT':
         return {
             ...state,
             todoText: action.payload

@@ -1,8 +1,9 @@
 import { ADD_NEW_TODO } from '../actions/todosAction'
 import { DELETE_TODO } from '../actions/todosAction'
-import { COMPLETED_TODO } from '../actions/todosAction'
+import { COMPLETE_TODO } from '../actions/todosAction'
 import { EDIT_TODO } from '../actions/todosAction'
 import { SAVE_EDIT_TODO } from '../actions/todosAction'
+import { EDIT_TODO_TEXT } from '../actions/todosAction'
 
 const initialState = {
   todos:  []
@@ -20,7 +21,7 @@ const todosReducer = (state = initialState, action) => {
         ...state,
         todos: [...state.todos.filter((todo) => todo.id !== action.payload.id)] 
       }  
-      case COMPLETED_TODO:
+      case COMPLETE_TODO:
       return {
         ...state,
         todos: [...state.todos.map((todo) => todo.id === action.payload.id?{ ...todo, isСompleted: !todo.isСompleted }:todo)] 
@@ -33,8 +34,13 @@ const todosReducer = (state = initialState, action) => {
         case SAVE_EDIT_TODO:
           return {
             ...state,
-            todos: [...state.todos.map((todo) => todo.id === action.payload.id?{ ...todo, isEdit: !todo.isEdit, description:action.payload}:todo)] 
-          }                                       
+            todos: [...state.todos.map((todo) => todo.id === action.payload1.id?{ ...todo, isEdit: !todo.isEdit, text:action.payload2}:todo)] 
+          }  
+          case EDIT_TODO_TEXT:
+            return {
+              ...state,
+              todos: [...state.todos.map((todo) => todo.id === action.payload1.id?{ ...todo, text:action.payload2}:todo)] 
+            }                                  
     default:
       return state
   }
