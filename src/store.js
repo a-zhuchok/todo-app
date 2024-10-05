@@ -1,12 +1,11 @@
-import { legacy_createStore as createStore, combineReducers } from 'redux';
-import todoTextReducer from './redux/reducers/todoTextReducer';
-import todosReducer from './redux/reducers/todosReducer';
+import { configureStore } from '@reduxjs/toolkit';
+import todosSlice from './redux/todosSlice';
+import todoTextSlice from './redux/todoTextSlice';
 
-const rootReducer = combineReducers({
-  todoText: todoTextReducer,
-  todos: todosReducer,
-});
-
-const store = createStore(rootReducer);
+const store = configureStore({
+  reducer: {
+    todoText: todoTextSlice,
+    todos: todosSlice,
+  }})
 
 export default store;
