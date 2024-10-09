@@ -11,9 +11,9 @@ const TodoList = () => {
     <div class='todoList'>
       <AddTodo />
       <ul>
-        {todos.map((todo) => todo.isEdit === false ?
-          <li key={todo.id}>{<Todo todo={todo} />}</li> :
-          <li key={todo.id}>{<EditTodo todo={todo} />}</li>)}
+        {todos.map((todo) => todo.isEdit ?
+          <li key={todo.id}>{<EditTodo todo={todo} />}</li>:
+          <li key={todo.id}>{<Todo todo={todo} />}</li>)}
       </ul>
     </div>
   );

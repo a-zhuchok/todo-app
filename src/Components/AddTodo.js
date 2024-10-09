@@ -8,7 +8,8 @@ const AddTodo = () => {
   const dispatch = useDispatch();
   const { todoText } = useSelector(state => state.todoText);
   const addTodo = e => {
-    dispatch(addNewTodo({ id: uuidv4(), text: todoText, isСompleted: false, isEdit: false, }))
+    if(todoText.trim() !== ""){
+    dispatch(addNewTodo({ id: uuidv4(), text: todoText, isСompleted: false, isEdit: false, }))}
     dispatch(addTodoText(''))
   }
   
@@ -16,7 +17,7 @@ const AddTodo = () => {
     <div class='addTodo'>
       <p class='addTodo_title'>Get things done!</p>
       <div>
-        <input class='addTodo_input' value={todoText} onChange={e => dispatch(addTodoText(e.target.value))} />
+        <input class='addTodo_input' value={todoText} onKeyPress={e => e.key==="Enter"?addTodo(e):false} onChange={e => dispatch(addTodoText(e.target.value))} />
         <button onClick={e => addTodo(e)}>Создать</button>
       </div>
     </div>
