@@ -2,16 +2,36 @@ import React, { useState } from 'react';
 import { Button, Form, Input, Radio,  message } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import {fetchAddUser} from '../redux/SignFormSlice';
+import { useNavigate } from 'react-router-dom';
+import LoginForm from './LoginForm';
+import { Link } from 'react-router-dom';
 
 
   const SignUp = () => {
     const dispatch = useDispatch()
-    
+    const navigate = useNavigate()
     const [messageApi, contextHolder] = message.useMessage()
-   
-    const onFinish =  (user) => {
-        console.log(user)
-        dispatch(fetchAddUser(user))
+    const success = () => {
+      messageApi.open({
+        type: 'success',
+        content: 'User is registered!',
+      })
+    }
+    const error = () => {
+      messageApi.open({
+        type: 'error',
+        content: 'This user already exists!',
+      })
+    }
+    const onFinish =  (newUser) => {
+      try {
+        dispatch(fetchAddUser(newUser))
+        success()
+        navigate('/LoginForm')
+      }
+       catch {
+        error()
+       } 
     }
     const onFinishFailed = (errorInfo) => {
       console.log('Failed:', errorInfo)
@@ -115,7 +135,7 @@ import {fetchAddUser} from '../redux/SignFormSlice';
           {contextHolder}
           <Button type="primary" htmlType="submit" style={{ height: '50px', backgroundColor: '#be6fff', fontSize: '20px' }} >Sign Up</Button>
         </Form>
-        <div class="pageLink">Already have an account?</div>
+        <div class="pageLink">Already have an account?<Link to="/LoginForm">Login!</Link></div>
       </div>
     );
   }

@@ -2,14 +2,14 @@ import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useSelector, useDispatch } from 'react-redux';
 import { addTodoText } from '../redux/todoTextSlice';
-import { addNewTodo } from '../redux/todosSlice';
+import { fetchAddTodo } from '../redux/todosSlice';
 
 const AddTodo = () => {
   const dispatch = useDispatch();
   const { todoText } = useSelector(state => state.todoText);
   const addTodo = e => {
     if(todoText.trim() !== ""){
-    dispatch(addNewTodo({ id: uuidv4(), text: todoText, isСompleted: false, isEdit: false, }))}
+    dispatch(fetchAddTodo({ id: uuidv4(), title: todoText, isСompleted: false, isEdit: false, }))}
     dispatch(addTodoText(''))
   }
   

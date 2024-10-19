@@ -1,19 +1,25 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, {useEffect, useState} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import AddTodo from './AddTodo';
 import Todo from './Todo';
 import EditTodo from './EditTodo';
+import { Link } from 'react-router-dom';
+import {fetchGetTodos} from '../redux/todosSlice'
+
 
 const TodoList = () => {
-  const { todos } = useSelector(state => state.todos);
-
+  const { status, data} = useSelector(state => state.todos)
+  const dispatch = useDispatch()
+  
+  useEffect(() => {
+      dispatch(fetchGetTodos())
+  }, [dispatch])
   return (
     <div class='todoList'>
       <AddTodo />
       <ul>
-        {todos.map((todo) => todo.isEdit ?
-          <li key={todo.id}>{<EditTodo todo={todo} />}</li>:
-          <li key={todo.id}>{<Todo todo={todo} />}</li>)}
+        {data.map((todo)=>
+        <li>{todo.title}</li>)}
       </ul>
     </div>
   );

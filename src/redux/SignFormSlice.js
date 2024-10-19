@@ -5,23 +5,19 @@ const headers={
     "Content-Type": "application/json"
 }
 const config={headers}
-
-const addUser = async user => {
-    const response = await axios.post(process.env.REACT_APP_SIGHUP_URL, JSON.stringify(user), config)
-    return response.json()
+const addUser = async newUser => {
+    const response = await axios.post(process.env.REACT_APP_SIGHUP_URL, JSON.stringify(newUser), config)
+    return await response.json()
   }
-
-const fetchAddUser = createAsyncThunk('user/fetchAddUser', async user => {
-  const  data  = await addUser(user)
-  
+const fetchAddUser = createAsyncThunk('user/fetchAddUser', async newUser => {
+  const  data  = await addUser(newUser)
   return data
-  
 })
 const initialState = {
-    user: {},
+    newUser: {},
   }; 
 const SignFromSlice = createSlice({
-  name: 'user',
+  name: 'newUser',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
