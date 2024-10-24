@@ -1,14 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import todosSlice from './redux/todosSlice';
 import todoTextSlice from './redux/todoTextSlice';
-import SignFormSlice from './redux/SignFormSlice';
+import signFormSlice from './redux/signFormSlice';
 import loginFormSlice from './redux/loginFormSlice';
 
 const store = configureStore({
   reducer: {
     todoText: todoTextSlice,
     todos: todosSlice,
-    newUser: SignFormSlice,
+    newUser: signFormSlice,
     user: loginFormSlice
   }})
 

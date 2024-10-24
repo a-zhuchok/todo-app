@@ -1,37 +1,32 @@
 import React from 'react';
 import { Button, Form, Input, message } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import {fetchLoginUser} from '../redux/loginFormSlice';
+import { fetchLoginUser } from '../redux/loginFormSlice';
 import { Link, useNavigate } from 'react-router-dom';
-import TodoList from './TodoList';
-
 
 const LoginForm = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const {status, data} = useSelector(state => state.user)
-    const onFinish =  (user) => {
-        dispatch(fetchLoginUser(user))
-        if(status==='succeeded') {
-          localStorage.setItem('user', data.token)
-          navigate('/TodoList')
-        }
-        else {error()}
-    }
-    const error = () => {
-      messageApi.open({
-        type: 'error',
-        content: 'User does not exist!',
-      })
-    }
-    const [messageApi, contextHolder] = message.useMessage()
-  
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { status } = useSelector(state => state.user);
+  const onFinish = (user) => {
+    dispatch(fetchLoginUser(user))
+     if(status === 'failed') { error() }
+  };
+  const error = () => {
+    messageApi.open({
+      type: 'error',
+      content: 'User does not exist!',
+    })
+  };
+  const [messageApi, contextHolder] = message.useMessage();
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo)
   }
 
   return (
     <div class='loginForm'>
+      {status === 'loading' && <p>Загрузка...</p>}
+      {status === 'succeeded' && navigate('/TodoList')}
       <Form
         colon={false}
         style={{
@@ -44,7 +39,7 @@ const LoginForm = () => {
       >
 
         <Form.Item
-          label={<text style={{ color: 'white', fontSize: '30px'}}>email</text>}
+          label={<text style={{ color: 'white', fontSize: '30px' }}>email</text>}
           name="email"
           rules={[
             {
@@ -57,7 +52,7 @@ const LoginForm = () => {
         </Form.Item>
 
         <Form.Item
-          label={<text style={{ color: 'white', fontSize: '30px'}}>password</text>}
+          label={<text style={{ color: 'white', fontSize: '30px' }}>password</text>}
           name="password"
           rules={[
             {

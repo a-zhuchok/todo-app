@@ -12,13 +12,10 @@ const addUser = async newUser => {
 const fetchAddUser = createAsyncThunk('user/fetchAddUser', async newUser => {
   const  data  = await addUser(newUser)
   return data
-})
-const initialState = {
-    newUser: {},
-  }; 
-const SignFromSlice = createSlice({
+}) 
+const signFromSlice = createSlice({
   name: 'newUser',
-  initialState,
+  initialState: {},
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchAddUser.fulfilled, (state, action) => {
@@ -28,4 +25,4 @@ const SignFromSlice = createSlice({
   },
 })
 export { fetchAddUser }
-export default SignFromSlice.reducer
+export default signFromSlice.reducer
