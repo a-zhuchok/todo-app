@@ -15,11 +15,13 @@ const TodoList = () => {
       dispatch(fetchGetTodos())
     }
     postData()
+    
   }, [dispatch]);
   const deleteTodo = (todo) => {
     dispatch(fetchDeleteTodo(todo))
   };
   const completeTodo = (todo) => {
+    todo = { ...todo, isCompleted: !todo.isCompleted }
     dispatch(fetchCompletedTodo(todo))
   };
 

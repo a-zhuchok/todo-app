@@ -32,7 +32,7 @@ const fetchDeleteTodo = createAsyncThunk('todos/fetchDeleteTodo', async todo => 
   return data
 })
 const completedTodo = async todo => {
-  const response = await axios.patch(process.env.REACT_APP_URL + '/' + todo.id + '/isCompleted', todo, config)
+  const response = await axios.patch(process.env.REACT_APP_URL + '/' + todo.id + '/isCompleted', {isCompleted: !todo.isCompleted}, config)
   return response
 }
 const fetchCompletedTodo = createAsyncThunk('todos/fetchCompletedTodo', async todo => {
@@ -40,7 +40,7 @@ const fetchCompletedTodo = createAsyncThunk('todos/fetchCompletedTodo', async to
   return data
 })
 const updateTodo = async todo => {
-  const response = await axios.patch(process.env.REACT_APP_URL + '/' + todo.id, ({ title: todo.title }), config)
+  const response = await axios.patch(process.env.REACT_APP_URL + '/' + todo.id, { title: todo.title }, config)
   return response
 }
 const fetchUpdateTodo = createAsyncThunk('todos/fetchUpdateTodo', async todo => {
@@ -69,7 +69,7 @@ const todosSlice = createSlice({
       })
       .addCase(fetchDeleteTodo.fulfilled, (state, action) => {
         state.status = 'succeeded'
-        state.data.filter((todo) => todo.id !== action.payload.id)
+        state.data=state.data.filter((todo) => todo.id !== action.payload.id)
       })
       .addCase(fetchDeleteTodo.pending, (state, action) => {
         state.status = 'loading'
@@ -77,7 +77,7 @@ const todosSlice = createSlice({
       })
       .addCase(fetchUpdateTodo.fulfilled, (state, action) => {
         state.status = 'succeeded'
-        state.data.map((todo) => todo.id === action.payload.id ? action.payload : todo)
+        state.data=state.data.map((todo) => todo.id === action.payload.id ? action.payload : todo)
       })
       .addCase(fetchUpdateTodo.pending, (state, action) => {
         state.status = 'loading'
@@ -85,7 +85,8 @@ const todosSlice = createSlice({
       })
       .addCase(fetchCompletedTodo.fulfilled, (state, action) => {
         state.status = 'succeeded'
-        state.data.map((todo) => todo.id === action.payload.id ? { ...todo, isСompleted: !todo.isСompleted } : todo)
+        console.log(action.payload)
+        state.data=state.data.map((todo) => todo.id === action.payload.id ? action.payload : todo)
       })
       .addCase(fetchCompletedTodo.pending, (state, action) => {
         state.status = 'loading'
