@@ -24,7 +24,6 @@ const TodoList = () => {
     todo = { ...todo, isCompleted: !todo.isCompleted }
     dispatch(fetchCompletedTodo(todo))
   };
-
   return (
     <div class='todoList'>
       <AddTodo />

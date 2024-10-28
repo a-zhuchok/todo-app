@@ -14,6 +14,7 @@ const EditTodo = ({ todo, isEdit }) => {
     isEdit=false
   };
 
+
   return (
     <div class="editTodo">
       <input type='text' value={text} onChange={handleChange}></input>
